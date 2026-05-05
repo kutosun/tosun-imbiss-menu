@@ -4,21 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tosun Imbiss Menü</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #0f0d0b;
       color: #fff;
     }
+
     .hero {
       min-height: 92vh;
-      padding: 28px 18px 70px;
+      padding: 22px 16px 55px;
       background:
-        radial-gradient(circle at top, rgba(245, 158, 11, .25), transparent 38%),
+        radial-gradient(circle at top, rgba(245,158,11,.25), transparent 38%),
         linear-gradient(135deg, #21170f, #0f0d0b 60%, #1a120c);
     }
+
     .nav {
       max-width: 1100px;
       margin: 0 auto;
@@ -28,11 +32,55 @@
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       border-radius: 999px;
-      padding: 12px 18px;
+      padding: 10px 14px;
+      gap: 12px;
     }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: 3px; }
-    .brand-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: #fbbf24; color: #000; }
-    .nav a { color: #ddd; text-decoration: none; margin-left: 18px; font-size: 14px; }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 14px;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+    }
+
+    .lang-switch button {
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .lang-switch button.active {
+      background: #fbbf24;
+      color: #000;
+    }
+
+    .hero-logo {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .hero-logo img {
+      width: 130px;
+      max-width: 45%;
+    }
+
     .hero-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -40,8 +88,9 @@
       grid-template-columns: 1.05fr .95fr;
       gap: 40px;
       align-items: center;
-      padding-top: 90px;
+      padding-top: 55px;
     }
+
     .badge {
       display: inline-block;
       border: 1px solid rgba(251,191,36,.35);
@@ -49,15 +98,43 @@
       color: #fde68a;
       border-radius: 999px;
       padding: 10px 16px;
-      font-weight: 700;
-      margin-bottom: 24px;
+      font-weight: 800;
+      margin-bottom: 22px;
     }
-    h1 { font-size: clamp(56px, 10vw, 120px); line-height: .86; margin: 0; text-transform: uppercase; letter-spacing: -5px; }
-    .hero p { color: #d6d3d1; font-size: 18px; line-height: 1.7; max-width: 560px; }
-    .btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
-    .btn { border-radius: 999px; padding: 15px 24px; font-weight: 900; text-decoration: none; display: inline-block; }
+
+    h1 {
+      font-size: clamp(54px, 10vw, 115px);
+      line-height: .86;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: -4px;
+    }
+
+    .hero p {
+      color: #d6d3d1;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 15px 24px;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-block;
+    }
+
     .btn-primary { background: #fbbf24; color: #000; }
     .btn-secondary { border: 1px solid rgba(255,255,255,.18); color: #fff; background: rgba(255,255,255,.06); }
+
     .special-card {
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
@@ -65,152 +142,542 @@
       padding: 18px;
       box-shadow: 0 25px 70px rgba(0,0,0,.35);
     }
-    .special-card-inner { border-radius: 24px; padding: 26px; background: linear-gradient(135deg, #2b2118, #17120d); }
-    .price-big { background: #fbbf24; color: #000; padding: 14px 18px; border-radius: 18px; font-size: 28px; font-weight: 900; display: inline-block; }
+
+    .special-card-inner {
+      border-radius: 24px;
+      padding: 24px;
+      background: linear-gradient(135deg, #2b2118, #17120d);
+    }
+
+    .price-big {
+      background: #fbbf24;
+      color: #000;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 28px;
+      font-weight: 900;
+      display: inline-block;
+    }
+
     .food-placeholder {
-      min-height: 260px;
       border-radius: 24px;
       margin-top: 24px;
+      overflow: hidden;
       border: 1px solid rgba(251,191,36,.2);
-      background: radial-gradient(circle, rgba(251,191,36,.18), transparent 50%), #15110d;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 30px;
+      background: #15110d;
     }
-    .tabs { position: sticky; top: 0; z-index: 10; background: rgba(15,13,11,.94); backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
-    .tabs-inner { max-width: 1100px; margin: 0 auto; padding: 12px 18px; display: flex; gap: 8px; overflow-x: auto; }
-    .tabs a { white-space: nowrap; color: #d6d3d1; text-decoration: none; background: rgba(255,255,255,.06); border-radius: 999px; padding: 10px 16px; font-weight: 800; font-size: 14px; }
+
+    .food-placeholder img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(15,13,11,.94);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .tabs-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .tabs a {
+      white-space: nowrap;
+      color: #d6d3d1;
+      text-decoration: none;
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
     .tabs a:hover { background: #fbbf24; color: #000; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 62px 18px; }
-    .section-title { color: #fbbf24; text-transform: uppercase; letter-spacing: 4px; font-size: 13px; font-weight: 900; }
-    h2 { font-size: clamp(34px, 5vw, 56px); margin: 10px 0 28px; }
-    .category { scroll-margin-top: 90px; margin-bottom: 56px; }
-    .category-head { border-bottom: 1px solid rgba(255,255,255,.12); padding-bottom: 18px; margin-bottom: 18px; }
-    .category h3 { margin: 0; font-size: 27px; text-transform: uppercase; }
-    .category p { color: #a8a29e; margin: 6px 0 0; }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 55px 16px;
+    }
+
+    .section-title {
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 56px);
+      margin: 10px 0 28px;
+    }
+
+    .category {
+      scroll-margin-top: 90px;
+      margin-bottom: 56px;
+    }
+
+    .category-head {
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+
+    .category h3 {
+      margin: 0;
+      font-size: 27px;
+      text-transform: uppercase;
+    }
+
+    .category p {
+      color: #a8a29e;
+      margin: 6px 0 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
     .item {
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.045);
       border-radius: 26px;
-      padding: 20px;
+      padding: 16px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 14px;
       transition: .2s;
     }
-.item img {
-  width: 95px;
-  height: 95px;
-  object-fit: cover;
-  border-radius: 18px;
-  flex-shrink: 0;
-}
-    .item:hover { transform: translateY(-3px); border-color: rgba(251,191,36,.35); background: rgba(255,255,255,.07); }
-    .item h4 { margin: 0; font-size: 18px; }
-    .item p { color: #a8a29e; margin: 9px 0 0; line-height: 1.5; font-size: 14px; }
-    .tag { display: inline-block; margin-left: 8px; color: #fbbf24; background: rgba(251,191,36,.12); padding: 4px 8px; border-radius: 999px; font-size: 12px; }
-    .price { color: #fbbf24; background: #090807; border: 1px solid rgba(255,255,255,.1); height: fit-content; padding: 12px 14px; border-radius: 16px; font-weight: 900; font-size: 18px; }
-    .offers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 42px; }
-    .offer-yellow { background: #fbbf24; color: #000; }
-    .offer-dark { background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.12); }
-    .offer { border-radius: 28px; padding: 28px; }
-    .offer h3 { font-size: 34px; margin: 8px 0; }
-    .offer strong { font-size: 52px; }
-    footer { border-top: 1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.28); }
-    .footer-grid { max-width: 1100px; margin: 0 auto; padding: 36px 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; color: #d6d3d1; }
-    footer h3 { margin: 0 0 8px; color: #fff; }
+
+    .item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(251,191,36,.35);
+      background: rgba(255,255,255,.07);
+    }
+
+    .item img {
+      width: 95px;
+      height: 95px;
+      object-fit: cover;
+      border-radius: 18px;
+      flex-shrink: 0;
+    }
+
+    .item h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .item p {
+      color: #a8a29e;
+      margin: 9px 0 0;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-left: 8px;
+      color: #fbbf24;
+      background: rgba(251,191,36,.12);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .price {
+      color: #fbbf24;
+      background: #090807;
+      border: 1px solid rgba(255,255,255,.1);
+      height: fit-content;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-weight: 900;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.28);
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      color: #d6d3d1;
+    }
+
+    footer h3 {
+      margin: 0 0 8px;
+      color: #fff;
+    }
+
     @media (max-width: 800px) {
-      .hero-inner, .grid, .offers, .footer-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .hero-inner { padding-top: 55px; }
-      h1 { letter-spacing: -3px; }
+      .hero {
+        min-height: auto;
+        padding-bottom: 45px;
+      }
+
+      .nav {
+        border-radius: 22px;
+      }
+
+      .brand {
+        letter-spacing: 1px;
+        font-size: 13px;
+      }
+
+      .hero-inner,
+      .grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        padding-top: 35px;
+        gap: 28px;
+      }
+
+      h1 {
+        font-size: 58px;
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .special-card {
+        border-radius: 24px;
+        padding: 12px;
+      }
+
+      .special-card-inner {
+        border-radius: 20px;
+        padding: 18px;
+      }
+
+      .food-placeholder img {
+        height: 220px;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 92px 1fr auto;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 20px;
+      }
+
+      .item img {
+        width: 92px;
+        height: 92px;
+      }
+
+      .item h4 {
+        font-size: 15.5px;
+      }
+
+      .item p {
+        font-size: 13px;
+      }
+
+      .price {
+        font-size: 15px;
+        padding: 9px 10px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .item {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .item img {
+        width: 82px;
+        height: 82px;
+      }
+
+      .price {
+        grid-column: 2;
+        width: fit-content;
+      }
     }
   </style>
 </head>
+
 <body>
-  <section class="hero" id="home">
-    <nav class="nav">
-     <div class="brand">
-  <img src="logo.png.png" alt="Logo" style="width:50px;height:50px;">
-  <div>TOSUN<br><span style="color:#fbbf24">IMBISS</span></div>
-</div>
-      <div class="nav-links"><a href="#menu">Menü</a><a href="#angebote">Angebote</a><a href="#kontakt">Kontakt</a></div>
-    </nav>
-    <div style="text-align:center; margin-top:30px;">
-  <img src="logo.png.png" alt="Logo" style="width:120px;">
+
+<section class="hero" id="home">
+  <nav class="nav">
+    <div class="brand">
+      <img src="logo.png.png" alt="Tosun Imbiss Logo">
+      <div>TOSUN<br><span style="color:#fbbf24">IMBISS</span></div>
+    </div>
+
+    <div class="lang-switch">
+      <button class="active" onclick="setLang('de', this)">DE</button>
+      <button onclick="setLang('tr', this)">TR</button>
+      <button onclick="setLang('en', this)">EN</button>
+    </div>
+  </nav>
+
+  <div class="hero-logo">
+    <img src="logo.png.png" alt="Tosun Imbiss Logo">
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="badge" data-i18n="badge">🔥 Frisch. Saftig. Echt.</div>
+      <h1>Tosun<br>Imbiss</h1>
+      <p data-i18n="heroText">Premium Streetfood mit kräftigem Geschmack: Döner, Yufka, Grill-Spezialitäten, Pommes und eiskalte Getränke.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#menu" data-i18n="menuBtn">Menü ansehen</a>
+        <a class="btn btn-secondary" href="#kontakt" data-i18n="contactBtn">Kontakt</a>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-inner">
+        <p style="color:#fbbf24;letter-spacing:3px;font-weight:900;margin:0" data-i18n="bestseller">BESTSELLER</p>
+        <h2 style="font-size:36px;margin:8px 0 16px">STEAK Döner</h2>
+        <span class="price-big">8,50</span>
+        <div class="food-placeholder">
+          <img src="doner.png" alt="Steak Döner">
+        </div>
+        <h3 style="margin-top:15px;" data-i18n="freshBread">Frisches Brot</h3>
+        <p data-i18n="foodText">Saftiges Fleisch · knackiger Salat · hausgemachter Geschmack</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <a href="#klassiker" data-i18n="tabClassic">Klassiker</a>
+    <a href="#grill" data-i18n="tabGrill">Grill Spezialitäten</a>
+    <a href="#beilagen" data-i18n="tabSides">Beilagen</a>
+    <a href="#getraenke" data-i18n="tabDrinks">Getränke</a>
+  </div>
 </div>
 
-    <div class="hero-inner">
-      <div>
-        <div class="badge">🔥 Frisch. Saftig. Echt.</div>
-        <h1>Tosun<br>Imbiss</h1>
-        <p>Premium Streetfood mit kräftigem Geschmack: Döner, Yufka, Grill-Spezialitäten, Pommes und eiskalte Getränke.</p>
-        <div class="btns"><a class="btn btn-primary" href="#menu">Menü ansehen</a><a class="btn btn-secondary" href="#kontakt">Kontakt</a></div>
-      </div>
-      <div class="special-card">
-        <div class="special-card-inner">
-          <p style="color:#fbbf24;letter-spacing:3px;font-weight:900;margin:0">BESTSELLER</p>
-          <h2 style="font-size:36px;margin:8px 0 16px">STEAK Döner</h2>
-          <span class="price-big">8,50</span>
-          <div class="food-placeholder">
-  <img src="doner.png" alt="Steak Döner">
-</div>
-<h3 style="margin-top:15px;">Frisches Brot</h3>
-<p>Saftiges Fleisch · knackiger Salat · hausgemachter Geschmack</p>
-        </div>
-      </div>
+<main class="container" id="menu">
+  <div class="section-title" data-i18n="menuTitleSmall">Speisekarte</div>
+  <h2 data-i18n="menuTitle">Unser Menü</h2>
+
+  <section class="category" id="klassiker">
+    <div class="category-head">
+      <h3 data-i18n="classic">Klassiker</h3>
+      <p data-i18n="classicDesc">Unsere beliebtesten Spezialitäten</p>
+    </div>
+
+    <div class="grid">
+      <div class="item"><img src="doner.png"><div><h4>STEAK Döner <span class="tag">⭐ Bestseller</span></h4><p data-i18n="donerDesc">Frisches Brot, saftiges Fleisch, knackiger Salat</p></div><div class="price">8,50</div></div>
+      <div class="item"><img src="durum.png"><div><h4>Döner im Yufka <span class="tag">🔥 Beliebt</span></h4><p data-i18n="durumDesc">Gerollt im Yufka, perfekt für unterwegs</p></div><div class="price">9,00</div></div>
+      <div class="item"><img src="donerbox.png"><div><h4>Döner Box</h4><p data-i18n="boxDesc">Mit Pommes oder Salat</p></div><div class="price">9,00</div></div>
     </div>
   </section>
 
-  <div class="tabs"><div class="tabs-inner"><a href="#klassiker">Klassiker</a><a href="#grill">Grill Spezialitäten</a><a href="#beilagen">Beilagen</a><a href="#getraenke">Getränke</a></div></div>
-
-  <main class="container" id="menu">
-    <div class="section-title">Speisekarte</div>
-    <h2>Unser Menü</h2>
-
-    <section class="category" id="klassiker">
-      <div class="category-head"><h3>Klassiker</h3><p>Unsere beliebtesten Spezialitäten</p></div>
-      <div class="grid">
-        <div class="item"><img src="doner.png"><div><h4>STEAK Döner im Fladenbrot <span class="tag">⭐ Bestseller</span></h4><p>Frisches Brot, saftiges Fleisch, knackiger Salat</p></div><div class="price">8,50</div></div>
-        <div class="item"><img src="durum.png"><div><h4>Döner im Yufka (Dürüm) <span class="tag">🔥 Beliebt</span></h4><p>Gerollt im Yufka, perfekt für unterwegs</p></div><div class="price">9,00</div></div>
-        <div class="item"><img src="donerbox.png"><div><h4>Döner Box</h4><p>Mit Pommes oder Salat</p></div><div class="price">9,00</div></div>
-      </div>
-    </section>
-
-    <section class="category" id="grill">
-      <div class="category-head"><h3>Grill Spezialitäten</h3><p>Herzhaft, würzig und frisch zubereitet</p></div>
-      <div class="grid">
-        <div class="item"><img src="kofte.png"><div><h4>Köfte im Brot</h4><p>Saftige Köfte im frischen Brot</p></div><div class="price">8,00</div></div>
-        <div class="item"><img src="adana.png"><div><h4>Adana im Yufka <span class="tag">Premium</span></h4><p>Würzig & leicht scharf</p></div><div class="price">8,00</div></div>
-        <div class="item"><img src="Sucuk.png"><div><h4>Sucuk im Brot</h4><p>Knusprige Knoblauchwurst im Brot</p></div><div class="price">7,50</div></div>
-        <div class="item"><img src="kokorec.jfif"><div><h4>Kokorec im Brot</h4><p>Traditionell, kräftig im Geschmack</p></div><div class="price">10,00</div></div>
-      </div>
-    </section>
-
-    <section class="category" id="beilagen">
-      <div class="category-head"><h3>Beilagen</h3><p>Knusprig dazu</p></div>
-      <div class="grid"><div class="item"><div><h4>Pommes</h4><p>Goldbraun & knusprig</p></div><div class="price">2,50</div></div></div>
-    </section>
-
-    <section class="category" id="getraenke">
-      <div class="category-head"><h3>Getränke</h3><p>Eiskalt serviert</p></div>
-      <div class="grid">
-        <div class="item"><div><h4>Softdrinks</h4><p>Verschiedene Sorten</p></div><div class="price">2,50</div></div>
-        <div class="item"><div><h4>Red Bull</h4><p>Energy Drink</p></div><div class="price">3,00</div></div>
-        <div class="item"><div><h4>Ayran</h4><p>Klassisch erfrischend</p></div><div class="price">1,50</div></div>
-        <div class="item"><div><h4>Wasser</h4><p>Still oder spritzig</p></div><div class="price">1,50</div></div>
-      </div>
-    </section>
-  </main>
-
-  <footer id="kontakt">
-    <div class="footer-grid">
-      <div><h3>Tosun Imbiss</h3><p>Frisch. Saftig. Echt.</p></div>
-      <div><p>📍 Ehinger Str.9, 89601 Schelklingen</p><p>📞 0172 4483123</p></div>
-      <div><p>📸 Instagram: @tosunimbiss</p><p>Alle Preise in Euro. Änderungen vorbehalten.</p></div>
+  <section class="category" id="grill">
+    <div class="category-head">
+      <h3 data-i18n="grill">Grill Spezialitäten</h3>
+      <p data-i18n="grillDesc">Herzhaft, würzig und frisch zubereitet</p>
     </div>
-  </footer>
+
+    <div class="grid">
+      <div class="item"><img src="kofte.png"><div><h4>Köfte im Brot</h4><p data-i18n="kofteDesc">Saftige Köfte im frischen Brot</p></div><div class="price">8,00</div></div>
+      <div class="item"><img src="adana.png"><div><h4>Adana im Yufka <span class="tag">Premium</span></h4><p data-i18n="adanaDesc">Würzig & leicht scharf</p></div><div class="price">8,00</div></div>
+      <div class="item"><img src="Sucuk.png"><div><h4>Sucuk im Brot</h4><p data-i18n="sucukDesc">Knusprige Knoblauchwurst im Brot</p></div><div class="price">7,50</div></div>
+      <div class="item"><img src="kokorec.jfif"><div><h4>Kokoreç im Brot</h4><p data-i18n="kokorecDesc">Traditionell, kräftig im Geschmack</p></div><div class="price">10,00</div></div>
+    </div>
+  </section>
+
+  <section class="category" id="beilagen">
+    <div class="category-head">
+      <h3 data-i18n="sides">Beilagen</h3>
+      <p data-i18n="sidesDesc">Knusprig dazu</p>
+    </div>
+
+    <div class="grid">
+      <div class="item"><div><h4>Pommes</h4><p data-i18n="pommesDesc">Goldbraun & knusprig</p></div><div class="price">2,50</div></div>
+    </div>
+  </section>
+
+  <section class="category" id="getraenke">
+    <div class="category-head">
+      <h3 data-i18n="drinks">Getränke</h3>
+      <p data-i18n="drinksDesc">Eiskalt serviert</p>
+    </div>
+
+    <div class="grid">
+      <div class="item"><div><h4>Softdrinks</h4><p data-i18n="softDesc">Verschiedene Sorten</p></div><div class="price">2,50</div></div>
+      <div class="item"><div><h4>Red Bull</h4><p>Energy Drink</p></div><div class="price">3,00</div></div>
+      <div class="item"><div><h4>Ayran</h4><p data-i18n="ayranDesc">Klassisch erfrischend</p></div><div class="price">1,50</div></div>
+      <div class="item"><div><h4>Wasser</h4><p data-i18n="waterDesc">Still oder spritzig</p></div><div class="price">1,50</div></div>
+    </div>
+  </section>
+</main>
+
+<footer id="kontakt">
+  <div class="footer-grid">
+    <div><h3>Tosun Imbiss</h3><p data-i18n="footerSlogan">Frisch. Saftig. Echt.</p></div>
+    <div><p>📍 Ehinger Str. 9, 89601 Schelklingen</p><p>📞 0172 4483123</p></div>
+    <div><p>📸 Instagram: @tosunimbiss</p><p data-i18n="footerNote">Alle Preise in Euro. Änderungen vorbehalten.</p></div>
+  </div>
+</footer>
+
+<script>
+  const translations = {
+    de: {
+      badge: "🔥 Frisch. Saftig. Echt.",
+      heroText: "Premium Streetfood mit kräftigem Geschmack: Döner, Yufka, Grill-Spezialitäten, Pommes und eiskalte Getränke.",
+      menuBtn: "Menü ansehen",
+      contactBtn: "Kontakt",
+      bestseller: "BESTSELLER",
+      freshBread: "Frisches Brot",
+      foodText: "Saftiges Fleisch · knackiger Salat · hausgemachter Geschmack",
+      tabClassic: "Klassiker",
+      tabGrill: "Grill Spezialitäten",
+      tabSides: "Beilagen",
+      tabDrinks: "Getränke",
+      menuTitleSmall: "Speisekarte",
+      menuTitle: "Unser Menü",
+      classic: "Klassiker",
+      classicDesc: "Unsere beliebtesten Spezialitäten",
+      donerDesc: "Frisches Brot, saftiges Fleisch, knackiger Salat",
+      durumDesc: "Gerollt im Yufka, perfekt für unterwegs",
+      boxDesc: "Mit Pommes oder Salat",
+      grill: "Grill Spezialitäten",
+      grillDesc: "Herzhaft, würzig und frisch zubereitet",
+      kofteDesc: "Saftige Köfte im frischen Brot",
+      adanaDesc: "Würzig & leicht scharf",
+      sucukDesc: "Knusprige Knoblauchwurst im Brot",
+      kokorecDesc: "Traditionell, kräftig im Geschmack",
+      sides: "Beilagen",
+      sidesDesc: "Knusprig dazu",
+      pommesDesc: "Goldbraun & knusprig",
+      drinks: "Getränke",
+      drinksDesc: "Eiskalt serviert",
+      softDesc: "Verschiedene Sorten",
+      ayranDesc: "Klassisch erfrischend",
+      waterDesc: "Still oder spritzig",
+      footerSlogan: "Frisch. Saftig. Echt.",
+      footerNote: "Alle Preise in Euro. Änderungen vorbehalten."
+    },
+
+    tr: {
+      badge: "🔥 Taze. Sulu. Gerçek.",
+      heroText: "Güçlü lezzetlerle premium sokak lezzetleri: Döner, Yufka, ızgara çeşitleri, patates ve soğuk içecekler.",
+      menuBtn: "Menüyü gör",
+      contactBtn: "İletişim",
+      bestseller: "EN ÇOK SATAN",
+      freshBread: "Taze ekmek",
+      foodText: "Sulu et · çıtır salata · ev yapımı lezzet",
+      tabClassic: "Klasikler",
+      tabGrill: "Izgara Çeşitleri",
+      tabSides: "Yan Ürünler",
+      tabDrinks: "İçecekler",
+      menuTitleSmall: "Menü",
+      menuTitle: "Menümüz",
+      classic: "Klasikler",
+      classicDesc: "En sevilen lezzetlerimiz",
+      donerDesc: "Taze ekmek, sulu et, çıtır salata",
+      durumDesc: "Yufkaya sarılır, yolda yemek için ideal",
+      boxDesc: "Patates veya salata ile",
+      grill: "Izgara Çeşitleri",
+      grillDesc: "Doyurucu, baharatlı ve taze hazırlanır",
+      kofteDesc: "Taze ekmekte sulu köfte",
+      adanaDesc: "Baharatlı ve hafif acılı",
+      sucukDesc: "Ekmekte çıtır sucuk",
+      kokorecDesc: "Geleneksel, yoğun lezzetli",
+      sides: "Yan Ürünler",
+      sidesDesc: "Yanına çıtır lezzetler",
+      pommesDesc: "Altın rengi ve çıtır",
+      drinks: "İçecekler",
+      drinksDesc: "Buz gibi servis edilir",
+      softDesc: "Çeşitli içecekler",
+      ayranDesc: "Klasik ferahlık",
+      waterDesc: "Sade veya gazlı",
+      footerSlogan: "Taze. Sulu. Gerçek.",
+      footerNote: "Tüm fiyatlar Euro cinsindendir. Değişiklik hakkı saklıdır."
+    },
+
+    en: {
+      badge: "🔥 Fresh. Juicy. Real.",
+      heroText: "Premium street food with bold flavor: döner, wraps, grilled specials, fries and ice-cold drinks.",
+      menuBtn: "View menu",
+      contactBtn: "Contact",
+      bestseller: "BESTSELLER",
+      freshBread: "Fresh bread",
+      foodText: "Juicy meat · crisp salad · homemade taste",
+      tabClassic: "Classics",
+      tabGrill: "Grill Specials",
+      tabSides: "Sides",
+      tabDrinks: "Drinks",
+      menuTitleSmall: "Menu",
+      menuTitle: "Our Menu",
+      classic: "Classics",
+      classicDesc: "Our most popular specialties",
+      donerDesc: "Fresh bread, juicy meat, crisp salad",
+      durumDesc: "Wrapped in yufka, perfect on the go",
+      boxDesc: "With fries or salad",
+      grill: "Grill Specials",
+      grillDesc: "Hearty, spicy and freshly prepared",
+      kofteDesc: "Juicy köfte in fresh bread",
+      adanaDesc: "Spicy & slightly hot",
+      sucukDesc: "Crispy garlic sausage in bread",
+      kokorecDesc: "Traditional, rich in flavor",
+      sides: "Sides",
+      sidesDesc: "Crispy on the side",
+      pommesDesc: "Golden & crispy",
+      drinks: "Drinks",
+      drinksDesc: "Served ice-cold",
+      softDesc: "Various flavors",
+      ayranDesc: "Classic refreshing taste",
+      waterDesc: "Still or sparkling",
+      footerSlogan: "Fresh. Juicy. Real.",
+      footerNote: "All prices in Euro. Subject to change."
+    }
+  };
+
+  function setLang(lang, btn) {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.textContent = translations[lang][key];
+    });
+
+    document.querySelectorAll(".lang-switch button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    document.documentElement.lang = lang;
+  }
+</script>
+
 </body>
 </html>
